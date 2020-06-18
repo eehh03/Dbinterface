@@ -16,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Handles requests for the application home page.
@@ -27,6 +29,42 @@ public class HomeController {
 	
 	@Inject
 	private IF_SampleService sampleService;
+	
+	
+	/**
+	 * 회원수정를 위한 경로, home.jsp 같이사용.20200618
+	 * Simply selects the home view to render by returning its name.
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/admin/member/update", method = RequestMethod.POST)
+	public String updateMember(MemberVO memberVO, Model model, RedirectAttributes rdat) throws Exception {
+		sampleService.updateMember(memberVO);
+		return "redirect:/";//삭제 된 후 화면 리플레쉬하는 효과 줌
+	}
+	
+	
+	/**
+	 * 회원삭제를 위한 경로, home.jsp 같이사용.20200617
+	 * Simply selects the home view to render by returning its name.
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/admin/member/delete", method = RequestMethod.POST)
+	public String deleteMember(@RequestParam("userid") String userid, Model model, RedirectAttributes rdat) throws Exception {
+		sampleService.deleteMember(userid);
+		return "redirect:/";//삭제 된 후 화면 리플레쉬하는 효과 줌
+	}
+	
+	
+	/**
+	 * 회원등록을 위한 경로, home.jsp 같이사용.20200617
+	 * Simply selects the home view to render by returning its name.
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/admin/member/create", method = RequestMethod.POST)
+	public String createMember(MemberVO memberVO, Model model, RedirectAttributes rdat) throws Exception {
+		sampleService.insertMember(memberVO);
+		return "redirect:/";
+	}
 	
 	/**
 	 * Simply selects the home view to render by returning its name.

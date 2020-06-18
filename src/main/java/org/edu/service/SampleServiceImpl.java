@@ -32,7 +32,7 @@ public class SampleServiceImpl implements IF_SampleService {
 
 	@Override
 	public void deleteMember(String userid) throws Exception {
-		// TODO Auto-generated method stub
+		sampleDAO.deleteMember(userid);
 		
 	}
 
